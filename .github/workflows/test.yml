@@ -18,23 +18,69 @@ jobs:
               with:
                   node-version: "20"
 
+            # Simulate dependency installation - this could be cached
             - name: Install dependencies
               run: |
-                  npm install
-                  # Simulate slow install
+                  echo "Installing dependencies..."
+                  # Simulate npm install - varies between 8-15 seconds
+                  sleep $((8 + RANDOM % 7))
+                  echo "Dependencies installed"
+
+            # Simulate linting - could be parallelized
+            - name: Run linter
+              run: |
+                  echo "Running linter..."
                   sleep 5
+                  echo "Linting complete"
 
-            - name: Run tests
+            # Simulate type checking - could be parallelized with tests
+            - name: Type check
               run: |
-                  echo "Running tests..."
-                  sleep 10
+                  echo "Running type check..."
+                  sleep 6
+                  echo "Type check complete"
 
-            - name: Build
+            # Simulate unit tests - could be parallelized
+            - name: Run unit tests
               run: |
-                  echo "Building..."
-                  sleep 8
+                  echo "Running unit tests..."
+                  # Varies between 12-20 seconds to show variation
+                  sleep $((12 + RANDOM % 8))
+                  echo "Unit tests complete"
 
+            # Simulate integration tests - slower, could be optimized
+            - name: Run integration tests
+              run: |
+                  echo "Running integration tests..."
+                  # Varies between 15-25 seconds
+                  sleep $((15 + RANDOM % 10))
+                  echo "Integration tests complete"
+
+            # Simulate build step - could benefit from caching
+            - name: Build application
+              run: |
+                  echo "Building application..."
+                  # Varies between 10-18 seconds
+                  sleep $((10 + RANDOM % 8))
+                  echo "Build complete"
+
+            # Simulate code coverage - could be parallelized
+            - name: Generate coverage report
+              run: |
+                  echo "Generating coverage report..."
+                  sleep 4
+                  echo "Coverage report generated"
+
+            # Simulate deployment preparation
+            - name: Prepare deployment
+              run: |
+                  echo "Preparing deployment..."
+                  sleep 3
+                  echo "Deployment ready"
+
+            # Final deployment step
             - name: Deploy
               run: |
                   echo "Deploying..."
-                  sleep 3
+                  sleep 2
+                  echo "Deployment complete"
